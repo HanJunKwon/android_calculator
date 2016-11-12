@@ -32,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setButton(){
+        b1 = (Button)findViewById(R.id.button);
+        b2 = (Button)findViewById(R.id.button2);
+        b3 = (Button)findViewById(R.id.button3);
+        b4 = (Button)findViewById(R.id.button4);
+        tv1 = (TextView)findViewById(R.id.textView2);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                getNumber();
+                tv1.setText("계산 결과 : "+(num1+num2));
+            }
+        });
     }
 
     void getNumber() {
