@@ -60,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 tv1.setText("계산 결과 : "+(num1*num2));
             }
         });
+
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getNumber();
+                tv1.setText("계산 결과 : "+(num1/num2));
+            }
+        });
     }
 
     void getNumber() {
