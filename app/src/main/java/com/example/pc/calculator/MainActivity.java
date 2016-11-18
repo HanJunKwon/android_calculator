@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText n1;
@@ -16,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     Button b4;
     TextView tv1;
 
-    int num1;
-    int num2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,46 +31,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setButton(){
-        b1 = (Button)findViewById(R.id.button);
-        b2 = (Button)findViewById(R.id.button2);
-        b3 = (Button)findViewById(R.id.button3);
-        b4 = (Button)findViewById(R.id.button4);
         tv1 = (TextView)findViewById(R.id.textView2);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                getNumber();
-                tv1.setText("계산 결과 : "+(num1+num2));
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getNumber();
-                tv1.setText("계산 결과 : "+(num1-num2));
-            }
-        });
-
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getNumber();
-                tv1.setText("계산 결과 : "+(num1*num2));
-            }
-        });
-
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getNumber();
-                tv1.setText("계산 결과 : "+(num1/num2));
-            }
-        });
     }
 
-    void getNumber() {
-        num1= Integer.parseInt(n1.getText().toString());
-        num2 = Integer.parseInt(n2.getText().toString());
+    void on(View v){
+        int num1 = Integer.parseInt(n1.getText().toString());
+        int num2 = Integer.parseInt(n2.getText().toString());
+        int result = 0;
+        // 더하기
+        if(v.getId() == R.id.button){
+            result = num1+ num2;
+        }
+        //뺴기
+        else if(v.getId() == R.id.button2){
+            result = num1 - num2;
+        }
+        //곱하기
+        else if(v.getId() == R.id.button3){
+            result = num1 * num2;
+        }
+        //나누기
+        else if(v.getId() == R.id.button4){
+            try {
+                result = num1 / num2;
+            }catch(ArithmeticException ae){
+                Toast.makeText(this, "0으로 나누시면 안 됩니다.", Toast.LENGTH_SHORT).show();
+                tv1.setText("계산 결과 : ");
+                return;
+            }
+        }
+        tv1.setText("계산 결과 : "+result);
     }
 }
