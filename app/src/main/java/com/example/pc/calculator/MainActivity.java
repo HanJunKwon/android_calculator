@@ -34,31 +34,43 @@ public class MainActivity extends AppCompatActivity {
         tv1 = (TextView)findViewById(R.id.textView2);
     }
 
-    void on(View v){
-        int num1 = Integer.parseInt(n1.getText().toString());
-        int num2 = Integer.parseInt(n2.getText().toString());
-        int result = 0;
-        // 더하기
-        if(v.getId() == R.id.button){
-            result = num1+ num2;
-        }
-        //뺴기
-        else if(v.getId() == R.id.button2){
-            result = num1 - num2;
-        }
-        //곱하기
-        else if(v.getId() == R.id.button3){
-            result = num1 * num2;
-        }
-        //나누기
-        else if(v.getId() == R.id.button4){
-            try {
-                result = num1 / num2;
-            }catch(ArithmeticException ae){
-                Toast.makeText(this, "0으로 나누시면 안 됩니다.", Toast.LENGTH_SHORT).show();
-                tv1.setText("계산 결과 : ");
-                return;
+    void on(View v) {
+        Float num1;
+        Float num2;
+        Float result=0.0f;
+        try{
+            num1 = Float.parseFloat(n1.getText().toString());
+            num2 = Float.parseFloat(n2.getText().toString());
+            // 더하기
+            if (v.getId() == R.id.button) {
+                result = num1 + num2;
             }
+            //뺴기
+            else if (v.getId() == R.id.button2) {
+                result = num1 - num2;
+            }
+            // 곱하기
+            else if (v.getId() == R.id.button3) {
+                result = num1 * num2;
+            }
+            // 나누기
+            else if (v.getId() == R.id.button4) {
+                result = num1 / num2;
+            }
+            //나누기 값
+            else if (v.getId() == R.id.button5) {
+                result = num1 % num2;
+            }
+        }catch(ArithmeticException ae){ // 0으로 나누기 예외처리
+            Toast.makeText(this, "0으로 나누시면 안됩니다", Toast.LENGTH_SHORT).show();
+
+            tv1.setText("계산결과 : ");
+            return;
+        }catch(NumberFormatException nfe){ // 값을 못 가저온 경우 예외처리
+            Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show();
+
+            tv1.setText("계산결과 : ");
+            return;
         }
         tv1.setText("계산 결과 : "+result);
     }

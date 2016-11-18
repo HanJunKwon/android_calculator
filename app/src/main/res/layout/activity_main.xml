@@ -16,14 +16,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText7" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editText8" />
 
@@ -55,6 +55,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/button4" />
 
+    <Button
+        android:text="나누기 값"
+        android:onClick="on"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5" />
+
     <TextView
         android:text="계산 결과 : "
         android:layout_width="match_parent"
@@ -63,5 +70,4 @@
         android:layout_weight="0.24"
         android:textSize="40sp"
         android:textAlignment="textStart" />
-
 </LinearLayout>
