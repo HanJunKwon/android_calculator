@@ -35,12 +35,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void on(View v) {
-        Float num1;
-        Float num2;
-        Float result=0.0f;
+        Float result = 0.0f;
         try{
-            num1 = Float.parseFloat(n1.getText().toString());
-            num2 = Float.parseFloat(n2.getText().toString());
+            Float num1 = Float.parseFloat(n1.getText().toString());
+            Float num2 = Float.parseFloat(n2.getText().toString());
             // 더하기
             if (v.getId() == R.id.button) {
                 result = num1 + num2;
@@ -56,22 +54,28 @@ public class MainActivity extends AppCompatActivity {
             // 나누기
             else if (v.getId() == R.id.button4) {
                 result = num1 / num2;
+                if(Float.isInfinite(result)){
+                    Toast.makeText(this, "0으로 나누시면 결과가 ∞입니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
             //나누기 값
             else if (v.getId() == R.id.button5) {
                 result = num1 % num2;
+                if(Float.isNaN(result)){
+                    Toast.makeText(this, "0으로 나누시면 안됩니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         }catch(ArithmeticException ae){ // 0으로 나누기 예외처리
             Toast.makeText(this, "0으로 나누시면 안됩니다", Toast.LENGTH_SHORT).show();
-
-            tv1.setText("계산결과 : ");
             return;
         }catch(NumberFormatException nfe){ // 값을 못 가저온 경우 예외처리
             Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show();
-
-            tv1.setText("계산결과 : ");
             return;
+        }finally {
+            tv1.setText("계산 결과 : ");
         }
-        tv1.setText("계산 결과 : "+result);
+        tv1.setText("계산 결과 : "+String.format("%.2f",result));
     }
 }
